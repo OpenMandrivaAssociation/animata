@@ -16,8 +16,7 @@ URL:		http://animata.kibu.hu/
 BuildRequires:	scons
 BuildRequires:	fltk-devel
 BuildRequires:	mesaglu-devel
-
-
+BuildRequires:	x11-server-xvfb
 %description
 Animata is an open source real-time animation software, designed to create
 animations, interactive background projections for concerts, theatre and dance
@@ -37,7 +36,7 @@ performances.
 %patch0 -p 0
 
 %build
-%scons
+/usr/bin/xvfb-run -a %scons
 
 
 %install
