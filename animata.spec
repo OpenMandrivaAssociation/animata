@@ -1,7 +1,7 @@
 %define name	animata
 %define version	 004
 %define date	091218
-%define release	%mkrel 0.%date 1
+%define release	%mkrel 0.%date.1
 %define Summary	 Open source real-time animation software
 
 Summary:	%Summary
