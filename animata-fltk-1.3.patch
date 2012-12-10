@@ -1,0 +1,24 @@
+--- src/libs/FLU/Flu_Tree_Browser.h.fltk	2011-08-03 14:00:34.000000000 +0200
++++ src/libs/FLU/Flu_Tree_Browser.h	2011-08-03 14:00:58.000000000 +0200
+@@ -216,10 +216,6 @@
+     { return _box->color(); }
+ 
+   //! Set the background color of the browser. Default is FL_WHITE
+-  inline void color( Fl_Color c )
+-    { _box->color( c ); }
+-
+-  //! Set the background color of the browser. Default is FL_WHITE
+   inline void color( unsigned c )
+     { _box->color( (Fl_Color)c ); }
+ 
+@@ -492,10 +488,6 @@
+     { return rdata.defSelectionColor; }
+ 
+   //! Set the color to use when hilighting selected entries. Default is FL_SELECTION_COLOR
+-  inline void selection_color( Fl_Color c )
+-    { rdata.defSelectionColor = c; }
+-
+-  //! Set the color to use when hilighting selected entries. Default is FL_SELECTION_COLOR
+   inline void selection_color( unsigned c )
+     { selection_color( (Fl_Color)c ); }
+ 

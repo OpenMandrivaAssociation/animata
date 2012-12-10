@@ -1,0 +1,11 @@
+diff -urN animata/src/OSCManager.cpp animata-patched/src/OSCManager.cpp
+--- animata/src/OSCManager.cpp	2009-12-18 21:59:28.000000000 +1000
++++ animata-patched/src/OSCManager.cpp	2012-11-23 16:57:18.803296832 +1100
+@@ -22,6 +22,7 @@
+ */
+ 
+ #include <iostream>
++#include <unistd.h>
+ 
+ #include "animata.h"
+ #include "animataUI.h"

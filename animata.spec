@@ -1,52 +1,54 @@
-%define name	animata
-%define version	 004
 %define date	091218
-%define release	%mkrel 0.%date.2
-%define Summary	 Open source real-time animation software
 
-Summary:	%Summary
-Name:		%name
-Version:	%version
-Release:	%release
-Source0:	http://animata.googlecode.com/files/%{name}_%{version}-%{date}.tar.gz
-Patch0:		animata-004-mdv-fix-FL-include-path.patch
+Summary:	Open source real-time animation software
+Name:		animata
+Version:	004
+Release:	0.%{date}.6
 License:	GPLv3
 Group:		Graphics
 URL:		http://animata.kibu.hu/
+Source0:	http://animata.googlecode.com/files/%{name}_%{version}-%{date}.tar.gz
+Patch0:		animata-004-mdv-fix-FL-include-path.patch
+Patch1:		animata-fltk-1.3.patch
+Patch2:		animata-004-gcc4.7.patch
 BuildRequires:	scons
 BuildRequires:	fltk-devel
-BuildRequires:	mesaglu-devel
+BuildRequires:	pkgconfig(cairo)
+BuildRequires:	pkgconfig(glu)
+BuildRequires:	pkgconfig(pixman-1)
 BuildRequires:	x11-server-xvfb
+
 %description
 Animata is an open source real-time animation software, designed to create
 animations, interactive background projections for concerts, theatre and dance
 performances.
 
-%files  
-%defattr(-,root,root)
-%doc	README AUTHORS CHANGES COPYING examples 
-%_bindir/%{name}
-%_datadir/icons/animata_icon.png
-%_datadir/applications/mandriva-%{name}.desktop
+%files
+%doc README AUTHORS CHANGES COPYING examples
+%{_bindir}/%{name}
+%{_datadir}/icons/animata_icon.png
+%{_datadir}/applications/mandriva-%{name}.desktop
 
 #------------------------------------------------------------------------------
 
 %prep
 %setup -q -n %{name}
-%patch0 -p 0
+%patch0 -p0
+%patch1 -p0
+%patch2 -p1
+sed -i -e "s/^LINKFLAGS =.*/LINKFLAGS = '%{ldflags}'/" src/SConscript
 
 %build
+%setup_compile_flags
 /usr/bin/xvfb-run -a %scons
 
-
 %install
-%__rm -rf %buildroot
-%__mkdir -p %buildroot/%_bindir
-%__mkdir -p %buildroot/%_datadir/icons/
-%__cp build/%{name}	%buildroot/%_bindir
-%__cp data/animata_icon.png	%buildroot/%_datadir/icons/
+mkdir -p %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_datadir}/icons/
+cp build/%{name}	%{buildroot}%{_bindir}
+cp data/animata_icon.png	%{buildroot}%{_datadir}/icons/
 
-%__mkdir -p %{buildroot}%{_datadir}/applications
+mkdir -p %{buildroot}%{_datadir}/applications
 cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=Animata
@@ -58,5 +60,3 @@ Type=Application
 Categories=3DGraphics;Graphics;Viewer;
 EOF
 
-%clean
-%__rm -rf %buildroot
