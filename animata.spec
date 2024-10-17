@@ -6,7 +6,7 @@ Version:	004
 Release:	0.%{date}.6
 License:	GPLv3
 Group:		Graphics
-URL:		http://animata.kibu.hu/
+URL:		https://animata.kibu.hu/
 Source0:	http://animata.googlecode.com/files/%{name}_%{version}-%{date}.tar.gz
 Patch0:		animata-004-mdv-fix-FL-include-path.patch
 Patch1:		animata-fltk-1.3.patch
